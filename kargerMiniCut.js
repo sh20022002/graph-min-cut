@@ -51,16 +51,16 @@ function kargerAlgo(graph){
         let v2 = graph[c2]; //will have the element in the place of c2 - 1
         const len = Math.max(v1.length, v2.length);
         var temp = [];
-        temp.push(...[v1[0]], ...[v2[0]]);
+        temp.push([...v1[0], ...v2[0]]);
         for(let edge = 1; edge < len; edge++){
             // if(!v2.includes(v1[edge]) && !temp.includes(v1[edge])){
             if(!(v1[edge] === v2[0])){
                 if(v1[edge]) temp.push(v1[edge]);
-            }else if(!v1.includes(v2[edge]) && !temp.includes(v2[edge])){
+            }else if(!v1.includes(v2[edge]) && !temp.includes(v2[edge]) && !temp[0].includes(v2[edge])){
                 if(v2[edge]) temp.push(v2[edge]);
             }
         }
-        graph.splice(c1, 1); //splice dosnt work in middle itarations becouse of a index problem
+        graph.splice(c1, 1); 
         graph[c2] = temp;
         return graphUpdate(graph, v2[0]);
     }
